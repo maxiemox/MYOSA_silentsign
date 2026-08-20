@@ -1,0 +1,21 @@
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--red);
+  transition: background 200ms ease;
+}
+
+.dot.on {
+  background: var(--teal);
+  box-shadow: 0 0 0 3px rgba(61, 220, 151, 0.15);
+}
