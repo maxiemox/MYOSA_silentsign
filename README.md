@@ -2,7 +2,7 @@
 publishDate: 2026-08-25
 title: SilentSign - A Low-Cost Gesture-to-Voice AAC Device
 excerpt: A gesture-to-voice AAC prototype built on the MYOSA Mini toolkit, turning wrist gestures into spoken phrases via a live dashboard.
-image: cover-image.jpg
+image: <img width="1600" height="900" alt="WhatsApp Image 2026-08-25 at 6 40 04 PM" src="https://github.com/user-attachments/assets/f41cd90c-6267-4760-ad9d-9c143c014d62" />
 tags:
 - AAC
 - Assistive Technology
