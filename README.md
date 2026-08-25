@@ -50,25 +50,14 @@ An estimated 70 million people in India live with a speech or communication disa
 
 ### Images
 
-Place all images in the same folder as this markdown file.
 
-<p align="center">
-  <img src="/assets/images/osa-silent-sign/cover-image.jpg" width="800"><br/>
-  <i>SilentSign prototype — sensor stack on ESP32, wired via USB</i>
-</p>
 
-<p align="center">
-  <img src="/assets/images/osa-silent-sign/dashboard-live.jpg" width="800"><br/>
-  <i>Live dashboard — "Now Speaking" panel, editable gesture vocabulary table, and timestamped event log</i>
-</p>
+
+
 
 ### Videos
 
-<video controls width="100%">
-  <source src="/silentsign-demo.mp4" type="video/mp4">
-</video>
-
-*Live demo: a gesture (e.g. "left") is detected by the ESP32, sent over USB serial to the laptop, matched against the vocabulary table, and spoken aloud by the dashboard — shown on-screen as "Now Speaking" along with a timestamped event log.*
+Live Demo (Drive) : https://drive.google.com/file/d/1_qlSOhWAQnA9Q7wqo940EExxJNtTRItW/view?usp=sharing
 
 ---
 
