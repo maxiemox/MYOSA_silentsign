@@ -1,7 +1,8 @@
 
 
 
-<img width="1600" height="900" alt="cover-image" src="https://github.com/user-attachments/assets/d19ea6c7-950a-4f9b-8de7-cd44e2b241e6" />
+<img width="3854" height="2168" alt="SilentSign_CoverImage jpg" src="https://github.com/user-attachments/assets/74e92f12-3e59-45d5-b4f2-661baff16c08" />
+
 ---
 
 PublishDate: 2026-08-25
