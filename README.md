@@ -148,17 +148,5 @@ arduino-cli upload -p COM3 --fqbn esp32:esp32:esp32 silentsign_firmware
 
 ---
 
-## File Structure (
 
-```
-/osa-silent-sign
-├─ osa-silent-sign.md
-├─ cover-image.jpg
-├─ dashboard-live.jpg
-├─ silentsign-demo.mp4
-└─ firmware/
-   └─ silentsign_firmware.ino
-```
-
----
 
