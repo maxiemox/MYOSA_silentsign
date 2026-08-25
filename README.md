@@ -158,12 +158,3 @@ arduino-cli upload -p COM3 --fqbn esp32:esp32:esp32 silentsign_firmware
 
 ---
 
-## License (Optional)
-
-Open-source — firmware and phrase configuration are freely available for adoption by NGOs, rehabilitation centres, and special schools.
-
----
-
-## Contribution Notes (Optional)
-
-Contributions welcome via pull request on the project GitHub repository. Planned next step: replacing the USB link with BLE for fully wireless, wrist-worn operation.
