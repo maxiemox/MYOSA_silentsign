@@ -152,7 +152,7 @@ arduino-cli upload -p COM3 --fqbn esp32:esp32:esp32 silentsign_firmware
 
 ---
 
-## File Structure (Optional)
+## File Structure (
 
 ```
 /osa-silent-sign
