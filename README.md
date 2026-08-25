@@ -1,5 +1,9 @@
 
 <img width="1600" height="900" alt="WhatsApp Image 2026-08-25 at 6 40 04 PM" src="https://github.com/user-attachments/assets/8f3cbf4c-3ff5-48cb-8ee5-a3d2e6f434c6" />
+
+
+
+
 ---
 publishDate: 2026-08-25
 title: SilentSign - A Low-Cost Gesture-to-Voice AAC Device
