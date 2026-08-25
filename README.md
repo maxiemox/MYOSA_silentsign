@@ -1,17 +1,9 @@
-
-<img width="1600" height="900" alt="WhatsApp Image 2026-08-25 at 6 40 04 PM" src="https://github.com/user-attachments/assets/8f3cbf4c-3ff5-48cb-8ee5-a3d2e6f434c6" />
-
-
-
-
 ---
-PublishDate: 2026-08-25
-
-Title: SilentSign - A Low-Cost Gesture-to-Voice AAC Device
-
-Excerpt: A gesture-to-voice AAC prototype built on the MYOSA Mini toolkit, turning wrist gestures into spoken phrases via a live dashboard.
-
-Tags:
+publishDate: 2026-08-25
+title: SilentSign - A Low-Cost Gesture-to-Voice AAC Device
+excerpt: A gesture-to-voice AAC prototype built on the MYOSA Mini toolkit, turning wrist gestures into spoken phrases via a live dashboard.
+image: cover-image.jpg
+tags:
 - AAC
 - Assistive Technology
 - ESP32
@@ -165,4 +157,5 @@ arduino-cli upload -p COM3 --fqbn esp32:esp32:esp32 silentsign_firmware
 ```
 
 ---
+
 
