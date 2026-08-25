@@ -1,56 +1,169 @@
-# SilentSign Dashboard
+---
+publishDate: 2026-08-25
+title: SilentSign - A Low-Cost Gesture-to-Voice AAC Device
+excerpt: A gesture-to-voice AAC prototype built on the MYOSA Mini toolkit, turning wrist gestures into spoken phrases via a live dashboard.
+image: osa-silent-sign/cover-image.jpg
+tags:
+- AAC
+- Assistive Technology
+- ESP32
+- MYOSA
+- Embedded Systems
+---
 
-Two pieces:
+> Giving a voice back to people with speech or communication disabilities.
 
-- **backend/** — FastAPI app. Listens for the ESP32 over raw TCP, stores the
-  gesture→phrase vocabulary in SQLite, and pushes live gesture events to the
-  browser over WebSocket.
-- **frontend/** — React (Vite) dashboard. Shows the currently spoken phrase
-  live, a scrolling event log, and an editable command table.
+---
 
-## Development (two servers, hot reload)
+## Acknowledgements
+
+Built by Team SilentSign — Mruthula S, Abhishek Somarajan, Sreeparvathy Preeth, and Mohamed Razin Mujeeb — B.Tech students at Adi Shankara Institute of Engineering and Technology (ASIET), Kalady, under the mentorship of Anju Mary Joseph, Dept. of RA, ASIET Kalady. Submitted as part of IEEE Sensors Council – MYOSA 6.0.
+
+---
+
+## Overview
+
+An estimated 70 million people in India live with a speech or communication disability, including ALS, cerebral palsy, stroke-induced aphasia, and autism spectrum disorder. Commercial AAC (Augmentative and Alternative Communication) devices cost USD 5,000–15,000, putting them out of reach for over 97% of people who need one.
+
+**SilentSign** is a low-cost gesture-to-voice prototype built on the MYOSA Mini toolkit. A wrist gesture is detected by the ESP32 and sensor stack, matched against a phrase vocabulary, and spoken aloud in real time through a live dashboard.
+
+**Current prototype status:** The ESP32 + sensor stack is wired to a laptop via USB, and gestures already trigger real speech output through a working web dashboard — this loop is fully functional today. Wireless (BLE) operation and a standalone, wrist-worn app are the next iteration, not yet built.
+
+**Key features:**
+* Gesture-to-speech working end-to-end on the current wired prototype, with a live web dashboard
+* Bill-of-materials cost under USD 30
+* 7 gestures mapped to editable AAC phrases (up, down, left, right, roll left, roll right, shake)
+* Configurable vocabulary — new gesture/phrase pairs can be added directly from the dashboard
+* Live sensor readout (temperature, pressure, altitude) alongside the gesture event log
+
+---
+
+## Demo / Examples
+
+### Images
+
+Place all images in the same folder as this markdown file.
+
+<p align="center">
+  <img src="/assets/images/osa-silent-sign/cover-image.jpg" width="800"><br/>
+  <i>SilentSign prototype — sensor stack on ESP32, wired via USB</i>
+</p>
+
+<p align="center">
+  <img src="/assets/images/osa-silent-sign/dashboard-live.jpg" width="800"><br/>
+  <i>Live dashboard — "Now Speaking" panel, editable gesture vocabulary table, and timestamped event log</i>
+</p>
+
+### Videos
+
+<video controls width="100%">
+  <source src="/silentsign-demo.mp4" type="video/mp4">
+</video>
+
+*Live demo: a gesture (e.g. "left") is detected by the ESP32, sent over USB serial to the laptop, matched against the vocabulary table, and spoken aloud by the dashboard — shown on-screen as "Now Speaking" along with a timestamped event log.*
+
+---
+
+## Features (Detailed)
+
+### 1. Directional Gesture Detection (APDS9960)
+
+The APDS9960 handles directional gesture detection — up, down, left, right — using four internal infrared photodiodes. It classifies swipe direction purely from the sequence and timing of light hitting each photodiode, and hands the ESP32 a clean directional result.
+
+`TECH: I2C address 0x39, polled via isGestureAvailable() / readGesture().`
+
+### 2. Motion & Orientation Sensing (MPU6050)
+
+The MPU6050 is a 3-axis accelerometer plus 3-axis gyroscope, giving additional gesture channels: roll left, roll right, and shake.
+
+`TECH: I2C address 0x68; gyro magnitude computed via sqrt(gx² + gy² + gz²) converted to degrees/second to distinguish fast vs. slow motion; accelerometer angle used for roll/tilt detection.`
+
+### 3. Environmental Sensing (BMP180)
+
+The BMP180 is active in the current build, providing live temperature, pressure, and altitude readings alongside gesture events on the dashboard.
+
+`TECH: I2C, 0–1100 hPa range.`
+
+Together, these sensors currently support **7 gestures**, each mapped to a configurable AAC phrase via the dashboard:
+
+| Gesture | Spoken Phrase |
+|---|---|
+| up | No |
+| down | Yes |
+| left | I need my medication |
+| right | I need help using the washroom |
+| roll left | I am hungry |
+| roll right | I am thirsty |
+| shake | Emergency! I need help |
+
+The vocabulary is not hardcoded — new gesture/phrase pairs can be added directly from the dashboard's input fields.
+
+### 4. Software Pipeline (Current: Wired via USB Serial)
+
+The ESP32 runs a continuous state machine and polls all sensors over I2C. When a gesture crosses the detection threshold, it sends the gesture ID as plain text over the USB serial connection to the laptop.
+
+The dashboard reads this serial data, looks up the matching phrase in its editable vocabulary table, speaks it aloud via text-to-speech, and logs the event with a timestamp — this full loop already works end-to-end.
+
+**Planned / Next Steps (not yet implemented):** Replacing the USB cable with a wireless BLE link, so the wearable can communicate with a phone app instead of a tethered laptop, making the device fully wrist-worn and untethered.
+
+---
+
+## Usage Instructions
+
+1. Connect the SilentSign prototype (ESP32 + sensor stack) to a laptop via USB cable.
+2. Open the SilentSign dashboard.
+3. Perform a gesture — up, down, left, right, roll left, roll right, or shake.
+4. The matched phrase is spoken aloud and logged live on the dashboard, with the option to add new gesture/phrase pairs on the fly.
+
+```plaintext
+# Example: flashing firmware to the ESP32
+arduino-cli upload -p COM3 --fqbn esp32:esp32:esp32 silentsign_firmware
+```
+
+---
+
+## Tech Stack
+
+* **ESP32** (MYOSA MCU) — gesture classification, serial transmission
+* **APDS9960** — directional gesture sensor
+* **MPU6050** — 3-axis accelerometer + gyroscope
+* **BMP180** — temperature, pressure, altitude
+* **USB Serial (UART)** — current wired link to laptop
+* **Web dashboard** — live phrase display, editable vocabulary, event log, text-to-speech
+* **Arduino / ESP-IDF** — firmware
+* *Planned:* BLE for wireless, wrist-worn operation
+
+---
+
+## Requirements / Installation
 
 ```bash
-# terminal 1 — backend
-cd backend
-pip install -r requirements.txt --break-system-packages
-python3 server.py --esp-port 5000 --web-port 8000
-
-# terminal 2 — frontend
-cd frontend
-npm install
-npm run dev
+# Arduino IDE or arduino-cli with ESP32 board support required for firmware flashing
+# Dashboard connects over serial once firmware is flashed
 ```
 
-Open http://localhost:5173 — Vite proxies `/api` and `/ws` to the backend on
-:8000 (see `frontend/vite.config.js`).
+---
 
-## Production (single server, single port)
+## File Structure (Optional)
 
-```bash
-cd frontend
-npm install
-npm run build
-cp -r dist/* ../backend/static/
-
-cd ../backend
-pip install -r requirements.txt --break-system-packages
-python3 server.py --esp-port 5000 --web-port 8000
+```
+/osa-silent-sign
+├─ osa-silent-sign.md
+├─ cover-image.jpg
+├─ dashboard-live.jpg
+├─ silentsign-demo.mp4
+└─ firmware/
+   └─ silentsign_firmware.ino
 ```
 
-Open http://<pi-ip>:8000 — the backend now serves the built React app
-directly, so only one port needs to be reachable at the demo table.
+---
 
-## ESP32 side
+## License (Optional)
 
-Unchanged: connect via TCP to `--esp-port` (default 5000) and send one JSON
-object per line, newline-terminated:
+Open-source — firmware and phrase configuration are freely available for adoption by NGOs, rehabilitation centres, and special schools.
 
-```cpp
-WiFiClient client;
-client.connect(serverIP, 5000);
-client.print("{\"gesture\":\"swipe_up\",\"confidence\":0.92}\n");
-```
+---
 
-The gesture id must match a row in the command table (edit it from the web
-UI) or it'll show as "(unknown gesture)" on the live panel.
+## Contribution Notes (Optional)
+
+Contributions welcome via pull request on the project GitHub repository. Planned next step: replacing the USB link with BLE for fully wireless, wrist-worn operation.
