@@ -57,7 +57,7 @@ An estimated 70 million people in India live with a speech or communication disa
 
 ### Videos
 
-Live Demo (Drive) : https://drive.google.com/file/d/1_qlSOhWAQnA9Q7wqo940EExxJNtTRItW/view?usp=sharing
+Live Demo (Drive) : https://drive.google.com/file/d/1_qlSOhWAQnA9Q7wqo940EExxJNtTRItW/view?
 
 ---
 
